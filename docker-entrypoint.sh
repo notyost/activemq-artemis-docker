@@ -2,7 +2,7 @@
 set -e
 
 # Log to tty to enable docker logs container-name
-sed -i "s/logger.handlers=.*/logger.handlers=CONSOLE/g" ../etc/logging.properties
+#sed -i "s/logger.handlers=.*/logger.handlers=CONSOLE/g" ../etc/logging.properties
 
 # Update users and roles with if username and password is passed as argument
 if [[ "$ARTEMIS_USERNAME" && "$ARTEMIS_PASSWORD" ]]; then
