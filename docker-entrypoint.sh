@@ -6,8 +6,10 @@ set -e
 
 # Update users and roles with if username and password is passed as argument
 if [[ "$ARTEMIS_USERNAME" && "$ARTEMIS_PASSWORD" ]]; then
-  sed -i "s/artemis=amq/$ARTEMIS_USERNAME=amq/g" ../etc/artemis-roles.properties
-  sed -i "s/artemis=simetraehcapa/$ARTEMIS_USERNAME=$ARTEMIS_PASSWORD/g" ../etc/artemis-users.properties
+  NEW_USERNAME=$(credstash -r $CREDSTASH_REGION -t $CREDSTASH_TABLE get -n $ARTEMIS_USERNAME env=$ENVIRON)
+  NEW_PASSWORD=$(credstash -r $CREDSTASH_REGION -t $CREDSTASH_TABLE get -n $ARTEMIS_PASSWORD env=$ENVIRON)
+  sed -i "s/artemis=amq/$NEW_USERNAME=amq/g" ../etc/artemis-roles.properties
+  sed -i "s/artemis=simetraehcapa/$NEW_USERNAME=$NEW_PASSWORD/g" ../etc/artemis-users.properties
 fi
 
 # Update min memory if the argument is passed
