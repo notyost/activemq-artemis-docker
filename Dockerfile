@@ -8,9 +8,9 @@ RUN groupadd -r artemis && useradd -r -g artemis artemis
 
 RUN apt-get -qq -o=Dpkg::Use-Pty=0 update && apt-get -qq -o=Dpkg::Use-Pty=0 upgrade -y && \
   apt-get -qq -o=Dpkg::Use-Pty=0 install -y --no-install-recommends libaio1 xmlstarlet \
-  build-essential libpq-dev python-pip python-dev libffi-dev libssl-dev && \
+  build-essential python-pip python-dev && \
   pip install -U credstash==1.12.0 &&\
-  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  apt-get clean && apt-get --purge autoremove && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.9
@@ -81,6 +81,8 @@ VOLUME ["/var/lib/artemis/etc"]
 
 WORKDIR /var/lib/artemis/bin
 
+ADD broker.xml ../etc/broker.xml
+ADD postgresql-9.4.1211.jar /opt/apache-artemis/lib/
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["artemis-server"]
