@@ -54,6 +54,10 @@ RUN cd /var/lib/artemis/etc && \
     -u "/amq:broker/amq:web/@bind" \
     -v "http://0.0.0.0:8161" bootstrap.xml
 
+# Add postgres JDBC driver and broker config for persistent storage through db
+ADD postgresql-9.4.1211.jar /opt/apache-artemis/lib/
+ADD broker.xml /var/lib/artemis/etc/broker.xml
+
 RUN chown -R artemis.artemis /var/lib/artemis
 
 # Web Server
@@ -81,8 +85,6 @@ VOLUME ["/var/lib/artemis/etc"]
 
 WORKDIR /var/lib/artemis/bin
 
-ADD broker.xml ../etc/broker.xml
-ADD postgresql-9.4.1211.jar /opt/apache-artemis/lib/
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["artemis-server"]
