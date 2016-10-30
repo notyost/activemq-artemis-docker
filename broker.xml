@@ -36,7 +36,7 @@ under the License.
 
       <store>
          <database-store>
-           <jdbc-connection-url>jdbc:postgresql://DATABASE_HOSTNAME/database-store?user=DATABASE_USERNAME&amp;password=DATABASE_PASSWORD;create=true</jdbc-connection-url>
+           <jdbc-connection-url>jdbc:postgresql://DATABASE_HOSTNAME/databasestore?user=DATABASE_USERNAME&amp;password=DATABASE_PASSWORD;create=true</jdbc-connection-url>
             <bindings-table-name>BINDINGS_TABLE</bindings-table-name>
             <message-table-name>MESSAGE_TABLE</message-table-name>
             <large-message-table-name>LARGE_MESSAGES_TABLE</large-message-table-name>
