@@ -34,9 +34,33 @@ under the License.
 
       <persistence-enabled>true</persistence-enabled>
 
+      <!-- this could be ASYNCIO or NIO
+       -->
+      <journal-type>ASYNCIO</journal-type>
+
+      <paging-directory>./data/paging</paging-directory>
+
+      <bindings-directory>./data/bindings</bindings-directory>
+
+      <journal-directory>./data/journal</journal-directory>
+
+      <large-messages-directory>./data/large-messages</large-messages-directory>
+
+      <journal-min-files>2</journal-min-files>
+
+      <journal-pool-files>-1</journal-pool-files>
+
+      <journal-buffer-timeout>119999</journal-buffer-timeout>
+
+      <disk-scan-period>5000</disk-scan-period>
+
+      <max-disk-usage>90</max-disk-usage>
+
+      <global-max-size>104857600</global-max-size>
+
       <store>
          <database-store>
-           <jdbc-connection-url>jdbc:postgresql://DATABASE_HOSTNAME/databasestore?user=DATABASE_USERNAME&amp;password=DATABASE_PASSWORD;create=true</jdbc-connection-url>
+           <jdbc-connection-url>jdbc:postgresql://DATABASE_HOSTNAME/databasestore?user=DATABASE_USERNAME&amp;password=DATABASE_PASSWORD</jdbc-connection-url>
             <bindings-table-name>BINDINGS_TABLE</bindings-table-name>
             <message-table-name>MESSAGE_TABLE</message-table-name>
             <large-message-table-name>LARGE_MESSAGES_TABLE</large-message-table-name>
